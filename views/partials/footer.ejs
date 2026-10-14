@@ -1,0 +1,334 @@
+</div>
+
+<footer class="site-footer" style="background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 40px 0 0 0; margin-top: 40px;">
+    <div class="container">
+        <div class="row" style="align-items: flex-start;">
+            <div class="col-md-12 mb-4">
+                <div class="row" style="display: flex; flex-wrap: wrap;">
+                    <!-- FlexNest -->
+                    <div class="col-md-4 mb-4" style="min-width: 250px;">
+                        <h4 style="font-weight: 700; letter-spacing: 1px;">FlexNest</h4>
+                        <p style="color: #e0e0e0; margin-bottom: 18px;">
+                            Your trusted platform for seamless property rentals, connecting landlords and tenants with innovative solutions and exceptional service.
+                        </p>
+                                                 <div class="social-icons-container" style="display: flex; align-items: center; gap: 12px; margin-top: 15px;">
+                             <a href="#" class="social-icon" style="color: #4267B2; font-size: 1.3rem; display: inline-flex; align-items: center; justify-content: center; width: 35px; height: 35px; background: rgba(226, 218, 218, 0.894); border-radius: 50%; transition: all 0.3s ease;"><i class="fab fa-facebook-f"></i></a>
+                             <a href="#" class="social-icon" style="color: #1DA1F2; font-size: 1.3rem; display: inline-flex; align-items: center; justify-content: center; width: 35px; height: 35px; background: rgba(226, 218, 218, 0.894); border-radius: 50%; transition: all 0.3s ease;"><i class="fab fa-twitter"></i></a>
+                             <a href="#" class="social-icon" style="color: #0077b5; font-size: 1.3rem; display: inline-flex; align-items: center; justify-content: center; width: 35px; height: 35px; background: rgba(226, 218, 218, 0.894); border-radius: 50%; transition: all 0.3s ease;"><i class="fab fa-linkedin-in"></i></a>
+                             <a href="#" class="social-icon" style="color: #E1306C; font-size: 1.3rem; display: inline-flex; align-items: center; justify-content: center; width: 35px; height: 35px; background: rgba(226, 218, 218, 0.894); border-radius: 50%; transition: all 0.3s ease;"><i class="fab fa-instagram"></i></a>
+                         </div>
+                    </div>
+                    <!-- Quick Links -->
+                    <div class="col-md-4 mb-4" style="min-width: 220px;">
+                        <h5 style="font-weight: 600; margin-bottom: 18px;">Quick Links</h5>
+                        <ul class="footer-links" style="list-style: none; padding: 0; margin: 0;">
+                            <li style="margin-bottom: 10px;"><a href="/houses" style="color: #e0e0e0; text-decoration: none;">Home</a></li>
+                            <li style="margin-bottom: 10px;"><a href="/about" style="color: #e0e0e0; text-decoration: none;">About</a></li>
+                            <li style="margin-bottom: 10px;"><a href="/houses" style="color: #e0e0e0; text-decoration: none;">Properties</a></li>
+                            <li style="margin-bottom: 10px;"><a href="/houses/new" style="color: #e0e0e0; text-decoration: none;">Add Property</a></li>
+                            <li style="margin-bottom: 10px;"><a href="/contact" style="color: #e0e0e0; text-decoration: none;">Contact</a></li>
+                        </ul>
+                    </div>
+                    <!-- Contact Us -->
+                    <div class="col-md-4 mb-4" style="min-width: 260px;">
+                        <h5 style="font-weight: 600; margin-bottom: 18px;">Contact Us</h5>
+                        <ul class="footer-contact" style="list-style: none; padding: 0; margin: 0;">
+                            <li style="margin-bottom: 10px;">
+                                <i class="fas fa-envelope" style="margin-right: 8px;"></i>
+                                <a href="mailto:info@rentahouse.com" style="color: #e0e0e0; text-decoration: none;">info@flexnest.com</a>
+                            </li>
+                            <li style="margin-bottom: 10px;">
+                                <i class="fas fa-phone" style="margin-right: 8px;"></i>
+                                <a href="tel:+1234567890" style="color: #e0e0e0; text-decoration: none;">+91 9876543210</a>
+                            </li>
+                            <li style="margin-bottom: 10px;">
+                                <i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i>
+                                305, Sunshine Complex , Mota Varachha, Surat, Gujarat 394101
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr style="border-color: rgba(255,255,255,0.15); margin: 0 0 18px 0;">
+        <div class="row">
+            <div class="col-12">
+                <p style="text-align: center; color: #e0e0e0; margin-bottom: 5; margin-top: -12px; font-size: 1.35rem;">
+                    <strong>FlexNest &copy; 2025</strong> &mdash; All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- JQUERY CDN -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+<!-- BOOTSTRAP CDN -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"
+    integrity="sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw" crossorigin="anonymous">
+</script>
+
+<!-- Navbar JavaScript -->
+<script>
+    // Toggle user dropdown menu
+    function toggleUserMenu() {
+        const dropdown = document.querySelector('.user-dropdown');
+        const menu = document.getElementById('userDropdown');
+        
+        if (dropdown && menu) {
+            dropdown.classList.toggle('active');
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        }
+    }
+
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        
+        if (mobileMenu && mobileMenuBtn) {
+            mobileMenu.classList.toggle('active');
+            mobileMenuBtn.classList.toggle('active');
+        }
+    }
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (mobileMenu && mobileMenuBtn) {
+                mobileMenu.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+            }
+        });
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar-modern');
+        if (navbar) {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }
+    });
+
+    // Close dropdowns when pressing escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            // Close user dropdown
+            const userDropdown = document.querySelector('.user-dropdown');
+            if (userDropdown) {
+                userDropdown.classList.remove('active');
+            }
+            
+            // Close mobile menu
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            if (mobileMenu && mobileMenuBtn) {
+                mobileMenu.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+            }
+        }
+    });
+
+    // Multiple File Upload Enhancement
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileInput = document.querySelector('.file-input');
+        const fileUploadArea = document.querySelector('.file-upload-area');
+        const uploadMain = document.querySelector('.upload-main');
+        const uploadSub = document.querySelector('.upload-sub');
+        const imagePreview = document.getElementById('imagePreview');
+        
+        let selectedFiles = [];
+        const maxFiles = 10;
+        const maxFileSize = 10 * 1024 * 1024; // 10MB
+        
+        if (fileInput && fileUploadArea) {
+            // Handle file selection
+            fileInput.addEventListener('change', function(e) {
+                handleFiles(e.target.files);
+            });
+            
+            // Handle drag and drop
+            fileUploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                fileUploadArea.classList.add('dragover');
+            });
+            
+            fileUploadArea.addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                fileUploadArea.classList.remove('dragover');
+            });
+            
+            fileUploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                fileUploadArea.classList.remove('dragover');
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handleFiles(files);
+                }
+            });
+        }
+        
+        function handleFiles(files) {
+            // Convert FileList to Array
+            const fileArray = Array.from(files);
+            
+            // Filter valid image files
+            const validFiles = fileArray.filter(file => {
+                const isValidType = file.type.startsWith('image/');
+                const isValidSize = file.size <= maxFileSize;
+                return isValidType && isValidSize;
+            });
+            
+            // Check if adding these files would exceed the limit
+            if (selectedFiles.length + validFiles.length > maxFiles) {
+                alert(`You can only upload up to ${maxFiles} images.`);
+                return;
+            }
+            
+            // Add valid files to selectedFiles
+            selectedFiles = [...selectedFiles, ...validFiles];
+            
+            // Update UI
+            updateFileDisplay();
+            updatePreview();
+            
+            // Update the file input with selected files
+            updateFileInput();
+        }
+        
+        function updateFileDisplay() {
+            if (selectedFiles.length > 0) {
+                fileUploadArea.classList.add('has-file');
+                uploadMain.textContent = `${selectedFiles.length} image${selectedFiles.length > 1 ? 's' : ''} selected`;
+                
+                const totalSize = selectedFiles.reduce((total, file) => total + file.size, 0);
+                uploadSub.textContent = `Total size: ${(totalSize / 1024 / 1024).toFixed(2)} MB`;
+            } else {
+                fileUploadArea.classList.remove('has-file');
+                uploadMain.textContent = 'Click to upload or drag and drop multiple images';
+                uploadSub.textContent = 'PNG, JPG, GIF up to 10MB each (Max 10 images)';
+            }
+        }
+        
+        function updatePreview() {
+            if (!imagePreview) return;
+            
+            imagePreview.innerHTML = '';
+            
+            selectedFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewItem = document.createElement('div');
+                    previewItem.className = 'image-preview-item';
+                    previewItem.innerHTML = `
+                        <img src="${e.target.result}" alt="Preview ${index + 1}">
+                        <div class="image-preview-overlay">
+                            <button type="button" class="remove-image-btn" onclick="removeImage(${index})">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="image-preview-info">
+                            <span class="image-name">${file.name}</span>
+                            <span class="image-size">${(file.size / 1024 / 1024).toFixed(2)} MB</span>
+                        </div>
+                    `;
+                    imagePreview.appendChild(previewItem);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        function updateFileInput() {
+            // Create a new DataTransfer object to simulate file selection
+            const dataTransfer = new DataTransfer();
+            selectedFiles.forEach(file => {
+                dataTransfer.items.add(file);
+            });
+            fileInput.files = dataTransfer.files;
+        }
+        
+        // Global function to remove images
+        window.removeImage = function(index) {
+            selectedFiles.splice(index, 1);
+            updateFileDisplay();
+            updatePreview();
+            updateFileInput();
+        };
+        
+        // Form submission loading state
+        const submitBtn = document.querySelector('.submit-btn');
+        const propertyForm = document.querySelector('.property-form');
+        
+        if (submitBtn && propertyForm) {
+            propertyForm.addEventListener('submit', function() {
+                submitBtn.classList.add('loading');
+                submitBtn.disabled = true;
+            });
+        }
+    });
+</script>
+
+<!-- Footer Social Icons Styling -->
+<style>
+/* Footer Social Icons Styling */
+.social-icons-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.social-icon i {
+    font-size: 1.3rem;
+}
+
+/* Responsive adjustments for footer */
+@media (max-width: 768px) {
+    .social-icons-container {
+        justify-content: center;
+        margin-top: 20px;
+    }
+    
+    .col-md-4 {
+        text-align: center;
+    }
+}
+</style>
+
+</body>
+
+</html>

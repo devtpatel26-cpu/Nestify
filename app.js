@@ -1,0 +1,115 @@
+var dotenv = require('dotenv').config();
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require("body-parser");
+const { MongoMemoryServer } = require('mongodb-memory-server');
+var app = express();
+var House = require("./models/house");
+var passport = require("passport");
+var LocalStrategy = require("passport-local");
+var passportLocalMongoose = require("passport-local-mongoose");
+var Comment = require("./models/comment");
+var User = require("./models/user");
+var methodOverride = require("method-override");
+var flash = require("connect-flash");
+
+const port = process.env.PORT || 3000;
+
+
+// Removes any script tags in the body
+// const expressSanitizer = require('express-sanitizer');
+// app.use(expressSanitizer());
+
+
+// Requiring ROUTES
+var commentRoutes = require("./routes/comments");
+var reviewRoutes = require("./routes/reviews");
+var houseRoutes = require("./routes/houses");
+var indexRoutes = require("./routes/index");
+
+
+// mongoose.connect("mongodb://localhost:27017/rent_a_house", {
+//     useNewUrlParser: true
+// });
+
+
+// HEROKU SETUP
+const dbURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/nestify';
+const mongooseOptions = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+};
+
+async function connectDatabase() {
+    try {
+        await mongoose.connect(dbURI, mongooseOptions);
+        console.log('Connected to DB!');
+    } catch (err) {
+        console.error('MongoDB connection failed:', err.message);
+        console.log('Attempting to use an in-memory MongoDB fallback for local development...');
+        try {
+            const mongoServer = await MongoMemoryServer.create({
+                instance: {
+                    launchTimeout: 60000
+                }
+            });
+            const memoryUri = mongoServer.getUri();
+            await mongoose.connect(memoryUri, mongooseOptions);
+            console.log('Connected to in-memory MongoDB. Data will not persist between restarts.');
+        } catch (memoryErr) {
+            console.error('In-memory MongoDB fallback failed:', memoryErr.message);
+            console.error('Set MONGODB_URI to a running MongoDB instance or start MongoDB locally.');
+            throw memoryErr;
+        }
+    }
+}
+
+app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(express.static(__dirname + "/public"));
+app.use(methodOverride("_method"));
+app.use(flash()); // flash updates
+app.locals.moment = require("moment");
+
+
+// PASSPORT CONFIG
+app.use(require("express-session")({
+    secret: "Miguel's Secret",
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// passport-local-mongoose config
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// currentUser
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
+    next();
+});
+
+app.use("/", indexRoutes);
+app.use("/houses", houseRoutes);
+app.use("/houses/:id/reviews", reviewRoutes);
+app.use("/houses/:id/comments", commentRoutes);
+
+
+// Express listens for requests (Start server)
+connectDatabase()
+    .then(() => {
+        app.listen(port, () => console.log(`Nestify starting on port ${port}!`));
+    })
+    .catch(() => {
+        console.error('Failed to start Nestify because the database could not be initialized.');
+        process.exit(1);
+    });

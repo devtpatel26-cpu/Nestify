@@ -1,0 +1,539 @@
+<% include ./partials/header %>
+
+<!-- Enhanced Hero Section -->
+<div class="contact-hero" style="background-image: url('/uploads/contact3.jpg'); background-size: 100% auto; background-position: center top -90px; background-repeat: no-repeat;">
+    <div class="hero-overlay"></div>
+    <div class="container">
+        <div class="hero-content text-center" style="padding-top: 0; padding-bottom: 40px;">
+            <h1 class="hero-title" style="font-size:4rem; margin-top: 0;">Get In Touch</h1>
+            <p class="hero-subtitle" style="font-size:1.7rem;">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+            <div class="hero-decoration">
+                <div class="decoration-line"></div>
+                <div class="decoration-dot"></div>
+                <div class="decoration-line"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Section -->
+<div class="contact-section">
+    <div class="container">
+        <div class="row">
+            <!-- Contact Information -->
+            <div class="col-lg-5 mb-5 mb-lg-0">
+                <div class="contact-info-card">
+                    <div class="card-header">
+                        <h3>
+                            <i class="fas fa-address-card" style="margin-right: 12px;"></i>
+                            Contact Information
+                        </h3>
+                        <p>Reach out to us through any of these channels</p>
+                    </div>
+                    
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h5>Email</h5>
+                                <p><a href="mailto:info@rentahouse.com">info@rentahouse.com</a></p>
+                                <small>We'll respond within 24 hours</small>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h5>Phone</h5>
+                                <p><a href="tel:+1234567890">+1 (234) 567-8900</a></p>
+                                <small>Mon-Fri: 9AM-6PM EST</small>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h5>Office</h5>
+                                <p>123 Business Street<br>Suite 100<br>New York, NY 10001</p>
+                                <small>United States</small>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h5>Business Hours</h5>
+                                <p>Monday - Friday: 9:00 AM - 6:00 PM<br>
+                                Saturday: 10:00 AM - 4:00 PM<br>
+                                Sunday: Closed</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            
+            <!-- Contact Form -->
+            <div class="col-lg-7">
+                <div class="contact-form-card">
+                    <div class="card-header">
+                        <h3>
+                            <i class="fas fa-paper-plane" style="margin-right: 16px;"></i>
+                            Send Message
+                        </h3>
+                        <% if(currentUser) { %>
+                            <p>Hello <strong><%= currentUser.username %></strong>! How can we help you today?</p>
+                        <% } else { %>
+                            <p>Tell us about your inquiry and we'll get back to you promptly.</p>
+                        <% } %>
+                    </div>
+                    
+                    <form action="/contact" method="POST" class="contact-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">Full Name *</label>
+                                    <% if(currentUser && (currentUser.firstName || currentUser.lastName)) { %>
+                                        <input type="text" class="form-control" id="name" name="name" 
+                                               value="<%= ((currentUser.firstName || '') + ' ' + (currentUser.lastName || '')).trim() %>" 
+                                               placeholder="Enter your full name" required>
+                                    <% } else { %>
+                                        <input type="text" class="form-control" id="name" name="name" 
+                                               placeholder="Enter your full name" required>
+                                    <% } %>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">Email Address *</label>
+                                    <% if(currentUser && currentUser.email) { %>
+                                        <input type="email" class="form-control" id="email" name="email" 
+                                               value="<%= currentUser.email %>" 
+                                               placeholder="Enter your email address" readonly required>
+                                        <small class="form-text">Your registered email address</small>
+                                    <% } else { %>
+                                        <input type="email" class="form-control" id="email" name="email" 
+                                               placeholder="Enter your email address" required>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <input type="text" class="form-control" id="subject" name="subject" 
+                                   placeholder="What is this regarding?" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" 
+                                      placeholder="Please describe your inquiry in detail..." required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter">
+                                <label class="form-check-label" for="newsletter">
+                                    Subscribe to our newsletter for updates and special offers
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane me-2"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Map Section (Optional) -->
+<div class="map-section">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h3>Find Our Office</h3>
+            <p>Visit us at our convenient downtown location</p>
+        </div>
+        <div class="map-embed" style="width: 100%; max-width: 800px; margin: 0 auto; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 16px rgba(102,126,234,0.13); position: relative;">
+            <!-- Google Maps Embed for Surat, Gujarat (matches footer address) -->
+            <iframe
+                src="https://www.google.com/maps?q=305,+Sunshine+Complex,+Mota+Varachha,+Surat,+Gujarat+394101&output=embed"
+                width="100%"
+                height="400"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="FlexNest Office Location"
+            ></iframe>
+            <!-- Arrow pointing to address below -->
+            <div style="position: absolute; left: 50%; bottom: -32px; transform: translateX(-50%); z-index: 2;">
+                <i class="fas fa-arrow-down" style="font-size: 2.2rem; color: #667eea; text-shadow: 0 2px 8px #fff;"></i>
+            </div>
+        </div>
+        <div class="text-center mt-4" style="margin-top: 48px;">
+            <span style="font-size: 1.15rem; font-weight: 600; color: #333;">
+                <i class="fas fa-map-marker-alt" style="color: #e53935; margin-right: 6px;"></i>
+                305, Sunshine Complex, Mota Varachha, Surat, Gujarat 394101
+            </span>
+        </div>
+    </div>
+</div>
+
+<% include ./partials/footer %>
+
+<!-- Enhanced Contact Page Styles -->
+<style>
+.contact-hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.hero-decoration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.decoration-line {
+    width: 60px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.decoration-dot {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+}
+
+.contact-section {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.contact-info-card,
+.contact-form-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    height: 100%;
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-info-card:hover,
+.contact-form-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.card-header h3 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.card-header p {
+    color: #666;
+    margin: 0;
+}
+
+.contact-items {
+    margin-bottom: 30px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.contact-icon i {
+    color: white;
+    font-size: 20px;
+}
+
+.contact-details h5 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.contact-details p {
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.contact-details a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.contact-details a:hover {
+    color: #5a6c7d;
+}
+
+.contact-details small {
+    color: #888;
+    font-size: 0.85rem;
+}
+
+.social-links {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.social-links h6 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    background: #f8f9fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #667eea;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.contact-form .form-group {
+    margin-bottom: 25px;
+}
+
+.contact-form label {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.contact-form .form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.contact-form .form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.contact-form select.form-control {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 12px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    padding-right: 40px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+.contact-form select.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background-color: white;
+}
+
+.contact-form select.form-control option {
+    background-color: white;
+    color: #333;
+    padding: 10px;
+}
+
+.contact-form select.form-control option:checked {
+    background-color: #667eea;
+    color: white;
+}
+
+.contact-form select.form-control option:hover {
+    background-color: #f8f9fa;
+}
+
+.form-check {
+    margin-top: 20px;
+}
+
+.form-check-input:checked {
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.map-section {
+    padding: 60px 0;
+    background: white;
+}
+
+.map-placeholder {
+    background: #f8f9fa;
+    border-radius: 20px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #dee2e6;
+}
+
+.map-content {
+    text-align: center;
+    color: #6c757d;
+}
+
+.map-content i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #667eea;
+}
+
+.map-content p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #495057;
+}
+
+.map-content small {
+    color: #6c757d;
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .contact-info-card,
+    .contact-form-card {
+        padding: 30px 20px;
+    }
+    
+    .contact-item {
+        padding: 15px;
+    }
+    
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        margin-right: 15px;
+    }
+    
+    .contact-icon i {
+        font-size: 16px;
+    }
+}
+</style>

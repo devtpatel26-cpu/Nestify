@@ -1,0 +1,197 @@
+    <% include ../partials/header %>
+<link rel="stylesheet" href="/stylesheets/houses.css">
+</div> <!-- Close container from header -->
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-overlay">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Find Your Perfect Home</h1>
+                <p class="hero-subtitle">Discover beautiful rental properties in amazing locations</p>
+                
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <form action="/houses" method="GET" class="search-form">
+                        <div class="search-input-group">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="search" name="search" placeholder="Search by name or city..." class="search-input">
+                            <button type="submit" class="search-btn">Search</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="hero-actions">
+                    <a href="/houses/new" class="btn-primary-modern">
+                        <i class="fas fa-plus"></i> Add New Property
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Properties Section -->
+<section class="properties-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 style="font-size: 3.6rem; font-weight: 900; letter-spacing: 1.5px;">Featured Properties</h2>
+            <p style="font-size: 2.2rem; font-weight: 600;">Explore our handpicked selection of rental homes</p>
+        </div>
+
+        <% if (houses && houses.length > 0) { %>
+        <div class="properties-grid">
+            <% houses.forEach(house => { %>
+            <!-- Medium-large property card box for found houses, slightly smaller than before -->
+            <div class="property-card medium-property-card" style="max-width: 440px; min-width: 280px; width: 100%; margin: 24px auto; box-shadow: 0 3px 20px rgba(102,126,234,0.14); border-radius: 1rem; overflow: hidden; display: inline-block; vertical-align: top;">
+                <div class="property-image" style="height: 250px; overflow: hidden;">
+                    <img src="<%= house.image %>" alt="<%= house.name %>" style="width:100%; height:250px; object-fit:cover; display:block;">
+                </div>
+                <div class="property-content" style="padding: 28px 28px 20px 28px;">
+                    <h4 class="property-title" style="font-size: 1.6rem; font-weight: 700; margin-bottom: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= house.name %></h4>
+                    <div class="property-location" style="font-size: 1.18rem; color: #667eea; margin-bottom: 10px;">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <%= house.location %>
+                    </div>
+                    <div class="property-stats" style="font-size: 1.15rem; color: #888; margin-bottom: 10px;">
+                        <span>
+                            <i class="fas fa-thumbs-up"></i>
+                            <%= house.likes.length %>
+                        </span>
+                        <% if (house.price) { %>
+                        <span style="float: right;">
+                            <i class="fas fa-rupee-sign"></i> <%= house.price %>/mo
+                        </span>
+                        <% } %>
+                    </div>
+                    <div class="property-rating" style="margin-bottom: 12px;">
+                        <% if (house.rating === 0) { %>
+                        <span style="font-size: 1.13rem; color: #bbb;">
+                            <i class="fas fa-star-o"></i> No reviews
+                        </span>
+                        <% } else { %>
+                        <span>
+                            <% for (let i = 1; i <= 5; i++) { %>
+                                <i class="fas fa-star<%= house.rating >= i ? ' star-filled' : ' star-empty' %>" style="color: <%= house.rating >= i ? '#FFD700' : '#e0e0e0' %>"></i>
+                            <% } %>
+                            <span class="rating-value" style="font-size: 1.13rem; color: #888;">(<%= house.rating.toFixed(1) %>)</span>
+                        </span>
+                        <% } %>
+                    </div>
+                    <a href="/houses/<%= house._id %>" class="btn-view-details" style="display: block; width: 100%; background: #667eea; color: #fff; border-radius: 0.6rem; padding: 12px 0; text-align: center; font-size: 1.18rem; font-weight: 600; text-decoration: none; margin-top: 10px;">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+        <% } else { %>
+            <div class="alert alert-warning" style="margin: 40px auto; max-width: 480px; text-align: center;">
+                <i class="fas fa-exclamation-circle" style="color: #ff9800; margin-right: 10px;"></i>
+                No properties found matching your search.
+            </div>
+        <% } %>
+    </div>
+</section>
+
+<!-- Modern Pagination -->
+<% if (pages && pages > 0) { %>
+<section class="pagination-section">
+    <div class="container">
+        <nav class="pagination-nav">
+            <ul class="pagination-modern">
+                <% if (current == 1) { %>
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <i class="fas fa-angle-double-left"></i>
+                        First
+                    </span>
+                </li>
+                <% } else { %>
+                <li class="page-item">
+                    <a class="page-link" href="/houses<%if(search){%>?search=<%=search%><%}%>">
+                        <i class="fas fa-angle-double-left"></i>
+                        First
+                    </a>
+                </li>
+                <% } %>
+                
+                <% if (current == 1) { %>
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <i class="fas fa-angle-left"></i>
+                    </span>
+                </li>
+                <% } else { %>
+                <li class="page-item">
+                    <a class="page-link" href="/houses?page=<%= Number(current) - 1 %><%if(search){%>&search=<%=search%><%}%>">
+                        <i class="fas fa-angle-left"></i>
+                    </a>
+                </li>
+                <% } %>
+                
+                <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                <% if (i !== 1) { %>
+                <li class="page-item disabled">
+                    <span class="page-link">...</span>
+                </li>
+                <% } %>
+                
+                <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                <% if (i == current) { %>
+                <li class="page-item active">
+                    <span class="page-link"><%= i %></span>
+                </li>
+                <% } else { %>
+                <li class="page-item">
+                    <a class="page-link" href="/houses?page=<%= i %><%if(search){%>&search=<%=search%><%}%>">
+                        <%= i %>
+                    </a>
+                </li>
+                <% } %>
+                <% if (i == Number(current) + 4 && i < pages) { %>
+                <li class="page-item disabled">
+                    <span class="page-link">...</span>
+                </li>
+                <% } %>
+                <% } %>
+                
+                <% if (current == pages) { %>
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <i class="fas fa-angle-right"></i>
+                    </span>
+                </li>
+                <% } else { %>
+                <li class="page-item">
+                    <a class="page-link" href="/houses?page=<%= Number(current) + 1 %><%if(search){%>&search=<%=search%><%}%>">
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <% } %>
+                
+                <% if (current == pages) { %>
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        Last
+                        <i class="fas fa-angle-double-right"></i>
+                    </span>
+                </li>
+                <% } else { %>
+                <li class="page-item">
+                    <a class="page-link" href="/houses?page=<%= pages %><%if(search){%>&search=<%=search%><%}%>">
+                        Last
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </li>
+                <% } %>
+            </ul>
+        </nav>
+    </div>
+</section>
+<% } %>
+
+
+
+
+<% include ../partials/footer %>
